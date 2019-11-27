@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 27 15:53:12 2019
+
+@author: 2ecee-15
+"""
+
+import pandas as pd
+one = {'Student': ['Ice Bear','Panda','Grizlly'],
+        'Math' : [80,95,79]}
+oneone = pd.DataFrame(one, columns = ['Student','Math'])
+two = {'Student': ['Ice Bear','Panda','Grizlly'],
+        'Electronics' : [85,81,83]}
+twotwo = pd.DataFrame(two, columns = ['Student','Electronics'])
+three = {'Student': ['Ice Bear','Panda','Grizlly'],
+        'GEAS' : [90,79,93]}
+threethree = pd.DataFrame(three, columns = ['Student','GEAS'])
+four = {'Student': ['Ice Bear','Panda','Grizlly'],
+        'ESAT' : [93,89,88]}
+fourfour = pd.DataFrame(four, columns = ['Student','ESAT'])
+una = pd.merge(oneone,twotwo, how = 'left' , on='Student')
+pangalawa = pd.merge(una,threethree, how = 'left' , on='Student')
+pangatlo = pd.merge(pangalawa,fourfour, how = 'left' , on='Student')
+
+A = pd.melt (pangatlo ,id_vars = 'Student', value_vars=['Math','Electronics','GEAS','ESAT'])
+B = A.rename(columns={'variable':'Subjects','value':'Grades'})
+C = B.sort_values('Student')
+D = C.reset_index()
+E = D.drop(columns = 'index')
