@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec  1 15:09:35 2019
+
+@author: JUSTIN
+"""
+
+import pandas as pd
+A = {"Box" :['Box1','Box1','Box1','Box2','Box2','Box2'],  "Dimension" : ['Length','Width','Height','Length','Width','Height'], "Value":[6,4,2,5,3,4]}
+messy = pd.DataFrame(A, columns = ['Box','Dimension','Value'])
+tidy = messy.pivot_table(index = ['Box'],columns = 'Dimension', values = 'Value').reset_index()
+tidy2 = tidy.assign(Volume=lambda tidy:  tidy.Length*tidy.Height*tidy.Width)
